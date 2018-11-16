@@ -10,7 +10,7 @@ public class HelloController {
 
     @GetMapping
     public String greeting() {
-        return "Hello from the first method in the controller!";
+        return "This has changed, wow!";
     }
 
 }
