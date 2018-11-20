@@ -22,9 +22,12 @@ pipeline {
 
         stage('Cleaning and Packaging') {
             steps {
-                echo "Attempting to compile"
+                echo "Cleaning application and packaging"
                 sh "mvn clean package"
             }
         }
+    }
+    post {
+        archiveArtifacts artifacts: '/target/*.jar', onlyIfSuccessful: true
     }
 }
