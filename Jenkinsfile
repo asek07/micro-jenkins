@@ -17,7 +17,12 @@ pipeline {
         stage('Compile') {
             steps {
                 echo "Attempting to compile"
-                sh "mvn compile"
+               try {
+                   sh "mvn compilez"
+               }
+                catch (exc) {
+                    echo "ERROR!: ${exc}"
+                }
             }
         }
 
