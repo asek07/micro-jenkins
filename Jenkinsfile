@@ -10,6 +10,7 @@ pipeline {
                 sh 'mvn --version'
                 echo "${output}"
                 echo "Current build number is: ${env.BUILD_NUMBER}"
+                echo "Workspace path: ${env.WORKSPACE}"
             }
         }
 
@@ -27,9 +28,9 @@ pipeline {
             }
         }
     }
-    post {
-       success {
-           archiveArtifacts artifacts: '/target/*.jar', onlyIfSuccessful: true
-       }
+//    post {
+//       success {
+//           archiveArtifacts artifacts: '/target/*.jar', onlyIfSuccessful: true
+//       }
     }
 }
