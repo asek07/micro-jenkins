@@ -1,15 +1,19 @@
 #!/bin/env groovy
 
-NAME="This variable works"
+output="The current Job Name is: ${env.JOB_NAME}"
 pipeline {
     agent any
     stages {
-        stage('Example Build') {
+        stage('Stage 1') {
             steps {
                 echo "This is working!"
                 sh 'mvn --version'
-                echo "${NAME}"
+                echo "${output}"
             }
+        }
+
+        stage('Job Info') {
+            echo "Current build number is: ${env.BUILD_NUMBER}"
         }
     }
 }
