@@ -1,8 +1,11 @@
 #!/bin/env groovy
 
 node {
-    stage "Stage 1"
+    stage ("Checkout")
     echo "this is the first stage of our groovy script."
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+              doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+              userRemoteConfigs: [[url: 'https://github.com/asek07/micro-jenkins.git']]])
 }
 
 //output="The current Job Name is: ${env.JOB_NAME}"
