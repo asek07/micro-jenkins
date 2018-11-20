@@ -1,8 +1,7 @@
 #!/usr/bin/env groovy
 pipeline {
-    agent any {
+    agent any
         stage("Compile") {
             echo "Hello World!"
         }
-    }
 }
