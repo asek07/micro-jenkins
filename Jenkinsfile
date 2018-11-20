@@ -1,21 +1,23 @@
 #!/bin/env groovy
 
-    node {
-       try {
-           stage ("Checkout") {
-               echo "this is the first stage of our groovy script."
-               checkout scm
-           }
-
-           stage ("Maven test") {
-               sh "mvn compileeee"
-           }
-       }
-       catch(err) {
-           echo "error: ${err}"
+node {
+   try {
+       stage ("Checkout") {
+           echo "this is the first stage of our groovy script."
+           checkout scm
        }
 
-    }
+       stage ("Maven test") {
+           sh "mvn compileeee"
+       }
+   }
+   catch(err) {
+       errorMessage(err)
+   }
+}
+def errorMessage(err) {
+    echo "Error has occurred: ${err}"
+}
 
 
 
