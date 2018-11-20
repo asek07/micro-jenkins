@@ -1,3 +1,6 @@
+#!/bin/env groovy
+
+NAME="This variable works"
 pipeline {
     agent any
     stages {
@@ -5,6 +8,7 @@ pipeline {
             steps {
                 echo "This is working!"
                 sh 'mvn --version'
+                echo "${NAME}"
             }
         }
     }
