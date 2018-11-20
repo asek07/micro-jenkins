@@ -17,11 +17,11 @@ pipeline {
         stage('Compile') {
             steps {
                 echo "Attempting to compile"
-               try {
-                   sh "mvn compilez"
-               }
-                catch (exc) {
-                    echo "ERROR!: ${exc}"
+                sh "mvn compilez"
+            }
+            post {
+                failure {
+                    echo "Compile stage has failed!"
                 }
             }
         }
@@ -37,5 +37,8 @@ pipeline {
        success {
            archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
        }
+        failure {
+            echo "build has failed "
+        }
     }
 }
