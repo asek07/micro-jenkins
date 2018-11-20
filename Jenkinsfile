@@ -28,9 +28,9 @@ pipeline {
             }
         }
     }
-//    post {
-//       success {
-//           archiveArtifacts artifacts: '/target/*.jar', onlyIfSuccessful: true
-//       }
+    post {
+       success {
+           archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
+       }
     }
 }
