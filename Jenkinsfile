@@ -13,7 +13,9 @@ pipeline {
         }
 
         stage('Job Info') {
-            echo "Current build number is: ${env.BUILD_NUMBER}"
+           steps {
+               echo "Current build number is: ${env.BUILD_NUMBER}"
+           }
         }
     }
 }
