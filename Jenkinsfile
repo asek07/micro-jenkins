@@ -28,6 +28,8 @@ pipeline {
         }
     }
     post {
-        archiveArtifacts artifacts: '/target/*.jar', onlyIfSuccessful: true
+       success {
+           archiveArtifacts artifacts: '/target/*.jar', onlyIfSuccessful: true
+       }
     }
 }
