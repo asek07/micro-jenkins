@@ -1,10 +1,11 @@
 #!/usr/bin/env groovy
 pipeline {
     agent any
-        stage("Compile") {
+    stages {
+        stage('Example Build') {
             steps {
-                echo "Hello World!"
+                echo "This is working!"
             }
-
         }
+    }
 }
