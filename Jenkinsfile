@@ -1,11 +1,12 @@
 #!/bin/env groovy
 
-def committerEmail = sh (
-        script: 'git --no-pager show -s --format=\'%ae\'',
-        returnStdout: true
-).trim()
+
 
 node {
+    def committerEmail = sh (
+            script: 'git --no-pager show -s --format=\'%ae\'',
+            returnStdout: true
+    ).trim()
    try {
        //Checking out the git repo
        stage ("Checkout") {
