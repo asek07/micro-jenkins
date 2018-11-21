@@ -1,11 +1,11 @@
 #!/bin/env groovy
 
-committerEmail = sh (
+@groovy.transform.Field String committerEmail = sh (
         script: 'git --no-pager show -s --format=\'%ce\'',
         returnStdout: true
 ).trim()
 
-committerName = sh (
+@groovy.transform.Field String committerName = sh (
         script: 'git --no-pager show -s --format=\'%cn\'',
         returnStdout: true
 ).trim()
