@@ -35,7 +35,7 @@ node {
            echo "Clean complete."
            echo "Testing build..."
            sh "mvn test"
-           echo "Test complete."
+           echo "\u2705 \033[1;32mTest complete.\033[0m"
        }
 
        stage ("Packaging") {
