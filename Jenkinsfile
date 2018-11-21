@@ -1,7 +1,7 @@
 #!/bin/env groovy
 
-GIT_NAME=$("git --no-pager show -s --format='%an' $GIT_COMMIT")
-GIT_EMAIL=$("git --no-pager show -s --format='%ae' $GIT_COMMIT")
+def GIT_NAME=$("git --no-pager show -s --format='%an' ")
+def GIT_EMAIL=$("git --no-pager show -s --format='%ae' ")
 
 node {
    try {
