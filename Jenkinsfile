@@ -88,7 +88,7 @@ def emailUser(status){
                 </h3>
                 <h2>Last commit information</h2>
                 <h3>Name: ${committerName}</h3>
-                <h3>Email: ${committerName}</h3>
+                <h3>Email: ${committerEmail}</h3>
                 """,
     )
 }
