@@ -23,7 +23,10 @@ node {
        }
 
        stage ("Build & Test") {
-           echo -e "I ${RED}love${NC} Stack Overflow\n"
+           ansiColor('xterm') {
+               echo -e "I ${RED}love${NC} Stack Overflow\n"
+           }
+
            echo "Cleaning build..."
            sh "mvn clean"
            echo "Clean complete."
@@ -43,13 +46,13 @@ node {
            archiveArtifacts 'target/*.jar'
            echo "Archival complete."
            currentBuild.result = 'SUCCESS'
-           emailUser("SUCCESS")
+           //emailUser("SUCCESS")
        }
    }
    catch(err) {
        currentBuild.result = 'FAILURE'
-       emailUser("FAILED")
-       errorMessage(err)
+       //emailUser("FAILED")
+       //errorMessage(err)
        throw err
    }
     finally {
