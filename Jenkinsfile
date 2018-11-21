@@ -11,6 +11,10 @@ node {
             returnStdout: true
     ).trim()
 
+    RED='\033[0;31m'
+    NC='\033[0m'
+
+
    try {
        //Checking out the git repo
        stage ("Checkout") {
@@ -19,6 +23,7 @@ node {
        }
 
        stage ("Build & Test") {
+           printf "I ${RED}love${NC} Stack Overflow\n"
            echo "Cleaning build..."
            sh "mvn clean"
            echo "Clean complete."
