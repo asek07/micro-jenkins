@@ -1,7 +1,9 @@
 #!/bin/env groovy
 
-def GIT_NAME=$("git --no-pager show -s --format='%an' ")
-def GIT_EMAIL=$("git --no-pager show -s --format='%ae' ")
+def committerEmail = sh (
+        script: 'git --no-pager show -s --format=\'%ae\'',
+        returnStdout: true
+).trim()
 
 node {
    try {
@@ -44,8 +46,7 @@ node {
     finally {
         if(currentBuild.result == 'SUCCESS') {
             echo "THE PIPELINE HAS COMPLETED SUCCESSFULLY!"
-            echo "Author: ${GIT_NAME}"
-            echo "Email: ${GIT_EMAIL}"
+            echo "${committerEmail}"
         }
     }
 }
