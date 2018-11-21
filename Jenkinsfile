@@ -1,7 +1,4 @@
 #!/bin/env groovy
-
-
-
 node {
     //find the user that did the last commit to the repo
     committerEmail = sh (
@@ -13,6 +10,7 @@ node {
             script: 'git --no-pager show -s --format=\'%cn\'',
             returnStdout: true
     ).trim()
+
    try {
        //Checking out the git repo
        stage ("Checkout") {
@@ -20,7 +18,6 @@ node {
            checkout scm
        }
 
-       //
        stage ("Build & Test") {
            echo "Cleaning build..."
            sh "mvn clean"
@@ -28,7 +25,6 @@ node {
            echo "Testing build..."
            sh "mvn test"
            echo "Test complete."
-
        }
 
        stage ("Packaging") {
@@ -60,8 +56,6 @@ node {
     }
 }
 
-
-
 def errorMessage(err) {
     echo "Error has occured: ${err}"
     echo "Console output can be found here ${env.BUILD_URL}"
@@ -86,9 +80,9 @@ def emailUser(status){
                 <h3>
                     Check console output <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>
                 </h3>
-                <h2 style='margin-bottom: "5px"'>Last commit information</h2>
-                <h4 style='margin-bottom: "5px"'>Name: ${committerName}</h4>
-                <h4 style='margin-bottom: "5px"'>Email: ${committerEmail}</h4>
+                <h2>Last commit information</h2>
+                <h4>Name: ${committerName}</h4>
+                <h4>Email: ${committerEmail}</h4>
                 """,
     )
 }
