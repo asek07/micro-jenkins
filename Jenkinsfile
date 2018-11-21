@@ -23,7 +23,7 @@ node {
        }
 
        stage ("Build & Test") {
-           printf "I ${RED}love${NC} Stack Overflow\n"
+           echo -e "I ${RED}love${NC} Stack Overflow\n"
            echo "Cleaning build..."
            sh "mvn clean"
            echo "Clean complete."
