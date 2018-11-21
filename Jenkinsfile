@@ -7,7 +7,7 @@ node {
     ).trim()
 
     committerName = sh (
-            script: 'git --no-pager show -s --format=\'%cn\'',
+                    script: 'git --no-pager show -s --format=\'%cn\'',
             returnStdout: true
     ).trim()
 
@@ -38,21 +38,20 @@ node {
            archiveArtifacts 'target/*.jar'
            echo "Archival complete."
            currentBuild.result = 'SUCCESS'
-           //emailUser("SUCCESS")
+           emailUser("SUCCESS")
        }
    }
    catch(err) {
        currentBuild.result = 'FAILURE'
-       //emailUser("FAILED")
+       emailUser("FAILED")
        errorMessage(err)
        throw err
    }
     finally {
         if(currentBuild.result == 'SUCCESS') {
             echo "THE PIPELINE HAS COMPLETED SUCCESSFULLY!"
-//            echo "Commiter Name: ${committerName}"
-//            echo "Commiter Email: ${committerEmail}"
-            echo "change info : ${currentBuild.changeSets}"
+            echo "Commiter Name: ${committerName}"
+            echo "Commiter Email: ${committerEmail}"
         }
     }
 }
