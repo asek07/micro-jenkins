@@ -86,9 +86,9 @@ def emailUser(status){
                 <h3>
                     Check console output <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>
                 </h3>
-                <h2>Last commit information</h2>
-                <h3>Name: ${committerName}</h3>
-                <h3>Email: ${committerEmail}</h3>
+                <h2 style='margin-bottom: 5px'>Last commit information</h2>
+                <h4 style='margin-bottom: 5px>Name: ${committerName}</h4>
+                <h4 style='margin-bottom: 5px>Email: ${committerEmail}</h4>
                 """,
     )
 }
