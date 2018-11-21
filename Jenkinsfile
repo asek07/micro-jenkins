@@ -29,6 +29,7 @@ node {
            echo "Archiving existing JAR snapshot."
            archiveArtifacts 'target/*.jar'
            echo "Archival complete."
+           currentBuild.result = 'SUCCESS'
        }
    }
    catch(err) {
