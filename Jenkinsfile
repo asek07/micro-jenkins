@@ -27,7 +27,7 @@ node {
 
        stage ("Build & Test") {
            ansiColor('vga') {
-               echo "\\033[1;32mCleaning build...\\033[0m"
+               echo "\033[1;32mCleaning build...\033[0m"
            }
 
 
