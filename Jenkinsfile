@@ -18,16 +18,19 @@ node {
    try {
        //Checking out the git repo
        stage ("Checkout") {
-           echo "Checking out repository."
+           ansiColor('vga') {
+               echo "\\e[32mChecking out repository."
+           }
+
            checkout scm
        }
 
        stage ("Build & Test") {
-           ansiColor('xterm') {
-               echo "I ${RED}love${NC} Stack Overflow\n"
+           ansiColor('vga') {
+               echo "\\e[32mCleaning build..."
            }
 
-           echo "Cleaning build..."
+
            sh "mvn clean"
            echo "Clean complete."
            echo "Testing build..."
