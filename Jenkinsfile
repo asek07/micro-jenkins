@@ -29,7 +29,7 @@ node {
 
        stage ("Packaging") {
            echo "Attempting to package..."
-           sh "mvn package"
+           sh "mvn packagez"
            echo "Packaging complete."
        }
 
