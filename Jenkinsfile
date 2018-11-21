@@ -1,5 +1,8 @@
 #!/bin/env groovy
 
+GIT_NAME=$("git --no-pager show -s --format='%an' $GIT_COMMIT")
+GIT_EMAIL=$("git --no-pager show -s --format='%ae' $GIT_COMMIT")
+
 node {
    try {
        //Checking out the git repo
@@ -41,6 +44,8 @@ node {
     finally {
         if(currentBuild.result == 'SUCCESS') {
             echo "THE PIPELINE HAS COMPLETED SUCCESSFULLY!"
+            echo "Author: ${GIT_NAME}"
+            echo "Email: ${GIT_EMAIL}"
         }
     }
 }
