@@ -30,21 +30,21 @@ def emailUser(status){
     //style the email accordingly
     def outcome = ""
     if (status == "SUCCESS") {
-        outcome = """<h1 style='color:#3CB371'>\\u2705 ${status}: 
+        outcome = """<h1 style='color:#3CB371'>${status}: 
                         <span style='color:#696969'>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</span>
                     </h1>"""
     } else {
-        outcome = """<h1 style='color:#DC143C'>\\u274C ${status}: 
+        outcome = """<h1 style='color:#DC143C'>${status}: 
                         <span style='color:#696969'>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</span>
                     </h1>"""
     }
     emailext (
-            to: "andy.sek94@gmail.com",
+            to: "andrew.sekulovski@cognizant.com",
             subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
             body: """
                 ${outcome}
                 <h3>
-                    Check console output <a href='${env.BUILD_URL}'>here</a>
+                    Check console output <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>
                 </h3>
                 """,
     )
