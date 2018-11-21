@@ -10,7 +10,7 @@ node {
 
        //Calling Maven to compile with error so it can be caught
        stage ("Maven test") {
-           sh "mvn compile"
+           sh "mvn compilez"
            emailUser("SUCCESS")
        }
    }
