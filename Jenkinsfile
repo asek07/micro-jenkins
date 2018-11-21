@@ -2,17 +2,21 @@
 
 node {
    try {
+       //Checking out the git repo
        stage ("Checkout") {
            echo "this is the first stage of our groovy script."
            checkout scm
        }
 
+       //Calling Maven to compile with error so it can be caught
        stage ("Maven test") {
            sh "mvn compileeee"
        }
    }
    catch(err) {
+       currentBuild.result = 'FAILURE'
        errorMessage(err)
+       throw err
    }
 }
 
