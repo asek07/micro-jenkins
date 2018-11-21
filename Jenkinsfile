@@ -1,18 +1,18 @@
 #!/bin/env groovy
 
-@groovy.transform.Field String committerEmail = sh (
-        script: 'git --no-pager show -s --format=\'%ce\'',
-        returnStdout: true
-).trim()
 
-@groovy.transform.Field String committerName = sh (
-        script: 'git --no-pager show -s --format=\'%cn\'',
-        returnStdout: true
-).trim()
 
 node {
     //find the user that did the last commit to the repo
+    committerEmail = sh (
+            script: 'git --no-pager show -s --format=\'%ce\'',
+            returnStdout: true
+    ).trim()
 
+    committerName = sh (
+            script: 'git --no-pager show -s --format=\'%cn\'',
+            returnStdout: true
+    ).trim()
    try {
        //Checking out the git repo
        stage ("Checkout") {
