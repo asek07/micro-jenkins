@@ -4,22 +4,44 @@ node {
    try {
        //Checking out the git repo
        stage ("Checkout") {
-           echo "this is the first stage of our groovy script."
+           echo "Checking out repository."
            checkout scm
        }
 
-       //Calling Maven to compile with error so it can be caught
-       stage ("Maven test") {
-           sh "mvn compilez"
-           emailUser("SUCCESS")
+       //
+       stage ("Build & Test") {
+           echo "Cleaning build..."
+           sh "mvn clean"
+           echo "Clean complete."
+           echo "Testing build..."
+           sh "mvn test"
+           echo "Test complete."
+           //emailUser("SUCCESS")
+       }
+
+       stage ("Packaging") {
+           echo "Attempting to package..."
+           sh "mvn package"
+           echo "Packaging complete."
+       }
+
+       stage ("Archival") {
+           echo "Archiving existing JAR snapshot."
+           archiveArtifacts 'target/*.jar'
+           echo "Archival complete."
        }
    }
    catch(err) {
        currentBuild.result = 'FAILURE'
-       emailUser("FAILED")
+       //emailUser("FAILED")
        errorMessage(err)
        throw err
    }
+    finally {
+        if(currentBuild.result = 'SUCCESS') {
+            echo "THE PIPELINE HAS COMPLETED SUCCESSFULLY!"
+        }
+    }
 }
 
 def errorMessage(err) {
