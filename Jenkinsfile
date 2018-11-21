@@ -15,9 +15,19 @@ node {
        errorMessage(err)
    }
 }
+
 def errorMessage(err) {
-    echo "Error has occurred: ${err}"
+    echo "Error has occured: ${err}"
+    echo "Console output can be found here ${env.BUILD_URL}"
 }
+//def emailUser(status){
+//    emailext (
+//            to: "you@gmail.com",
+//            subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+//            body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+//            <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+//    )
+//}
 
 
 
