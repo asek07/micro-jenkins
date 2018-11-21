@@ -27,11 +27,22 @@ def errorMessage(err) {
     echo "Console output can be found here ${env.BUILD_URL}"
 }
 def emailUser(status){
+    //style the email accordingly
+    def outcome = ""
+    if (status == "SUCCESS") {
+        outcome = "<h1 style='color:green'>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</h1>"
+    } else {
+        outcome = "<h1 style='color:red'>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</h1>"
+    }
     emailext (
             to: "andy.sek94@gmail.com",
             subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-            body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-            <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+            body: """
+                ${outcome}
+                <h4>
+                    Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>
+                </h4>
+                """,
     )
 }
 
