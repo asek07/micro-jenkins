@@ -19,7 +19,7 @@ node {
        //Checking out the git repo
        stage ("Checkout") {
            ansiColor('vga') {
-               echo "\\033[1;32mChecking out repository.\\033[0m"
+               echo "\033[1;32mChecking out repository.\033[0m"
            }
 
            checkout scm
