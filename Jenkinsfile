@@ -3,8 +3,14 @@
 
 
 node {
+    //find the user that did the last commit to the repo
     def committerEmail = sh (
-            script: 'git --no-pager show -s --format=\'%ae\'',
+            script: 'git --no-pager show -s --format=\'%ce\'',
+            returnStdout: true
+    ).trim()
+
+    def committerName = sh (
+            script: 'git --no-pager show -s --format=\'%cn\'',
             returnStdout: true
     ).trim()
    try {
@@ -47,7 +53,8 @@ node {
     finally {
         if(currentBuild.result == 'SUCCESS') {
             echo "THE PIPELINE HAS COMPLETED SUCCESSFULLY!"
-            echo "${committerEmail}"
+            echo "Commiter Name: ${committerName}"
+            echo "Commiter Email: ${committerEmail}"
         }
     }
 }
