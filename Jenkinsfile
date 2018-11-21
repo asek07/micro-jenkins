@@ -38,7 +38,7 @@ node {
            archiveArtifacts 'target/*.jar'
            echo "Archival complete."
            currentBuild.result = 'SUCCESS'
-           emailUser("SUCCESS")
+           //emailUser("SUCCESS")
        }
    }
    catch(err) {
@@ -50,8 +50,12 @@ node {
     finally {
         if(currentBuild.result == 'SUCCESS') {
             echo "THE PIPELINE HAS COMPLETED SUCCESSFULLY!"
-            echo "Commiter Name: ${committerName}"
-            echo "Commiter Email: ${committerEmail}"
+//            echo "Commiter Name: ${committerName}"
+//            echo "Commiter Email: ${committerEmail}"
+            echo "TITLE: ${env.CHANGE_TITLE}"
+            echo "NAME: ${env.CHANGE_AUTHOR}"
+            echo "NAME: ${env.CHANGE_AUTHOR_DISPLAY_NAME}"
+            echo "NAME: ${env.CHANGE_AUTHOR_EMAIL}"
         }
     }
 }
