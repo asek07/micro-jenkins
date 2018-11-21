@@ -38,7 +38,7 @@ node {
        throw err
    }
     finally {
-        if(currentBuild.result = 'SUCCESS') {
+        if(currentBuild.result == 'SUCCESS') {
             echo "THE PIPELINE HAS COMPLETED SUCCESSFULLY!"
         }
     }
