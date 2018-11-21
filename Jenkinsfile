@@ -24,7 +24,7 @@ node {
 
        stage ("Build & Test") {
            ansiColor('xterm') {
-               echo -e "I ${RED}love${NC} Stack Overflow\n"
+               echo "I ${RED}love${NC} Stack Overflow\n"
            }
 
            echo "Cleaning build..."
