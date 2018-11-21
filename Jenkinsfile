@@ -1,18 +1,18 @@
 #!/bin/env groovy
 
+committerEmail = sh (
+        script: 'git --no-pager show -s --format=\'%ce\'',
+        returnStdout: true
+).trim()
 
+committerName = sh (
+        script: 'git --no-pager show -s --format=\'%cn\'',
+        returnStdout: true
+).trim()
 
 node {
     //find the user that did the last commit to the repo
-    def committerEmail = sh (
-            script: 'git --no-pager show -s --format=\'%ce\'',
-            returnStdout: true
-    ).trim()
 
-    def committerName = sh (
-            script: 'git --no-pager show -s --format=\'%cn\'',
-            returnStdout: true
-    ).trim()
    try {
        //Checking out the git repo
        stage ("Checkout") {
@@ -28,7 +28,7 @@ node {
            echo "Testing build..."
            sh "mvn test"
            echo "Test complete."
-           //emailUser("SUCCESS")
+
        }
 
        stage ("Packaging") {
@@ -42,6 +42,7 @@ node {
            archiveArtifacts 'target/*.jar'
            echo "Archival complete."
            currentBuild.result = 'SUCCESS'
+           emailUser("SUCCESS")
        }
    }
    catch(err) {
@@ -58,6 +59,8 @@ node {
         }
     }
 }
+
+
 
 def errorMessage(err) {
     echo "Error has occured: ${err}"
@@ -83,6 +86,9 @@ def emailUser(status){
                 <h3>
                     Check console output <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>
                 </h3>
+                <h2>Last commit information</h2>
+                <h3>Name: ${committerName}</h3>
+                <h3>Email: ${committerName}</h3>
                 """,
     )
 }
