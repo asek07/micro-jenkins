@@ -15,7 +15,7 @@ try {
    //Checking out the git repo
    stage ("Checkout") {
        ansiColor('vga') {
-           echo "\033[1;34mChecking out repository.\033[0m"
+           echo "\033[1;34m Checking out repository.\033[0m"
        }
 
        checkout scm
@@ -23,20 +23,20 @@ try {
 
    stage ("Build & Test") {
        ansiColor('vga') {
-           echo "\033[1;34mCleaning build...\033[0m"
+           echo "\033[1;34m Cleaning build...\033[0m"
            sh "mvn clean"
            echo "Clean complete."
            echo "Testing build..."
            sh "mvn test"
-           echo "\033[1;32m \u2705 Test complete.\033[0m"
+           echo "\033[1;32m Test complete.\033[0m"
        }
    }
 
    stage ("Packaging") {
        ansiColor('vga') {
-           echo "\033[1;34m \u2705 Test complete.\033[0m"
+           echo "\033[1;34m Test complete.\033[0m"
            sh "mvn package"
-           echo "\033[1;32m \u2705 Packaging complete.\033[0m"
+           echo "\033[1;32m Packaging complete.\033[0m"
        }
    }
 
