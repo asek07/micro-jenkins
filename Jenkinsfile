@@ -36,7 +36,7 @@ node {
            ansiColor('vga') {
                echo "\033[1;34mStage 3: Packinging project.\033[0m"
                sh "mvn package"
-               echo "\033[1;32m Packaging complete.\033[0m"
+               echo "\033[1;32mPackaging complete.\033[0m"
            }
        }
 
@@ -73,6 +73,7 @@ def errorMessage(err) {
         echo "\033[1;31mConsole output can be found here ${env.BUILD_URL} \033[0m"
     }
 }
+
 def emailUser(status){
     //style the email accordingly
     def outcome = ""
