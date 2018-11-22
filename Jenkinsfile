@@ -11,65 +11,66 @@ node {
             returnStdout: true
     ).trim()
 
-    RED='\033[0;31m'
-    NC='\033[0m'
-
-
-   try {
-       //Checking out the git repo
-       stage ("Checkout") {
-           ansiColor('vga') {
-               echo "\033[1;32mChecking out repository.\033[0m"
-           }
-
-           checkout scm
+try {
+   //Checking out the git repo
+   stage ("Checkout") {
+       ansiColor('vga') {
+           echo "\033[1;34mChecking out repository.\033[0m"
        }
 
-       stage ("Build & Test") {
-           ansiColor('vga') {
-               echo "\033[1;32mCleaning build...\033[0m"
-           }
+       checkout scm
+   }
 
-
+   stage ("Build & Test") {
+       ansiColor('vga') {
+           echo "\033[1;34mCleaning build...\033[0m"
            sh "mvn clean"
            echo "Clean complete."
            echo "Testing build..."
            sh "mvn test"
            echo "\033[1;32m \u2705 Test complete.\033[0m"
        }
+   }
 
-       stage ("Packaging") {
-           echo "Attempting to package..."
+   stage ("Packaging") {
+       ansiColor('vga') {
+           echo "\033[1;34m \u2705 Test complete.\033[0m"
            sh "mvn package"
-           echo "Packaging complete."
+           echo "\033[1;32m \u2705 Packaging complete.\033[0m"
        }
+   }
 
-       stage ("Archival") {
-           echo "Archiving existing JAR snapshot."
+   stage ("Archival") {
+       ansiColor('vga') {
+           echo "\033[1;34m Archiving existing JAR snapshot.\033[0m"
            archiveArtifacts 'target/*.jar'
-           echo "Archival complete."
+           echo "\033[1;32m Archival successful!\033[0m"
            currentBuild.result = 'SUCCESS'
            //emailUser("SUCCESS")
        }
    }
-   catch(err) {
-       currentBuild.result = 'FAILURE'
-       //emailUser("FAILED")
-       //errorMessage(err)
-       throw err
-   }
-    finally {
-        if(currentBuild.result == 'SUCCESS') {
-            echo "THE PIPELINE HAS COMPLETED SUCCESSFULLY!"
+}
+catch(err) {
+   currentBuild.result = 'FAILURE'
+   //emailUser("FAILED")
+   //errorMessage(err)
+   throw err
+}
+finally {
+    if(currentBuild.result == 'SUCCESS') {
+        ansiColor('vga') {
+            echo "\033[1;32mPipeline has completed successfully! \033[0m"
             echo "Commiter Name: ${committerName}"
             echo "Commiter Email: ${committerEmail}"
         }
+
     }
+}
 }
 
 def errorMessage(err) {
-    echo "Error has occured: ${err}"
-    echo "Console output can be found here ${env.BUILD_URL}"
+    echo "\033[1;31mAn error has occured: ${err} \033[0m"
+    echo "\033[1;31mConsole output can be found here ${env.BUILD_URL} \033[0m"
 }
 def emailUser(status){
     //style the email accordingly
@@ -84,7 +85,7 @@ def emailUser(status){
                     </h1>"""
     }
     emailext (
-            to: "andrew.sekulovski@cognizant.com",
+            to: "${committerEmail}",
             subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
             body: """
                 ${outcome}
