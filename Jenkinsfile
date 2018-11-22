@@ -46,8 +46,8 @@ node {
                archiveArtifacts 'target/*.jar'
                echo "\033[1;32mArchival successful!\033[0m"
                currentBuild.result = 'SUCCESS'
-               emailUser("SUCCESS")
            }
+           emailUser("SUCCESS")
        }
     }
     catch(err) {
