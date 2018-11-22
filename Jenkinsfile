@@ -35,7 +35,7 @@ node {
        stage ("Packaging") {
            ansiColor('vga') {
                echo "\033[1;34mStage 3: Packinging project.\033[0m"
-               sh "mvn pack2age"
+               sh "mvn package"
                echo "\033[1;32m Packaging complete.\033[0m"
            }
        }
