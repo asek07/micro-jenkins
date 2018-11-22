@@ -47,18 +47,19 @@ node {
                echo "\033[1;32mArchival successful!\033[0m"
                currentBuild.result = 'SUCCESS'
            }
-           emailUser("SUCCESS")
+           //emailUser("SUCCESS")
        }
     }
     catch(err) {
        currentBuild.result = 'FAILURE'
-       emailUser("FAILED")
+       //emailUser("FAILED")
        errorMessage(err)
        throw err
     }
     finally {
-        if(currentBuild.result == 'SUCCESS') {
-            ansiColor('vga') {
+        ansiColor('vga') {
+            echo "\033[1;33mDuration of build: ${currentBuild.durationString}\033[0m"
+            if(currentBuild.result == 'SUCCESS') {
                 echo "\033[1;32mPipeline has completed successfully! \033[0m"
                 echo "Commiter Name: ${committerName}"
                 echo "Commiter Email: ${committerEmail}"
