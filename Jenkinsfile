@@ -26,11 +26,11 @@ node {
                echo "\033[1;34mStage 2: Cleaning build...\033[0m"
 
                output = sh (
-                       script: 'ls',
+                       script: 'date',
                        returnStdout: true
                ).trim()
 
-               echo "GETTING COMMITER EMAIL!!!!! ${output}"
+               echo "Date: ${output}"
 
                sh "mvn clean"
                echo "\033[1;32mClean complete.\033[0m"
