@@ -25,12 +25,12 @@ node {
            ansiColor('vga') {
                echo "\033[1;34mStage 2: Cleaning build...\033[0m"
 
-               committerEmail = sh (
-                       script: 'git --no-pager show -s --format=\'%ce\'',
+               output = sh (
+                       script: 'ls',
                        returnStdout: true
                ).trim()
 
-               echo "GETTING COMMITER EMAIL!!!!! ${committerEmail}"
+               echo "GETTING COMMITER EMAIL!!!!! ${output}"
 
                sh "mvn clean"
                echo "\033[1;32mClean complete.\033[0m"
