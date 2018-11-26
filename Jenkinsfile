@@ -24,6 +24,16 @@ node {
        stage ("Build & Test") {
            ansiColor('vga') {
                echo "\033[1;34mStage 2: Cleaning build...\033[0m"
+
+               def commit = sh (returnStdout: true,
+                       script: '''echo hi
+                                echo bye | grep -o "e"
+                                date
+                                echo lol''').split()
+
+
+               echo "${commit[-1]} "
+
                sh "mvn clean"
                echo "\033[1;32mClean complete.\033[0m"
                echo "\033[1;34mStage 2.1: Running tests.\033[0m"
