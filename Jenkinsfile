@@ -32,6 +32,8 @@ node {
 
                echo "Date: ${output}"
 
+               echo "ls -l"
+
                sh "date"
 
                sh "mvn clean"
