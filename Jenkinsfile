@@ -26,13 +26,15 @@ node {
                echo "\033[1;34mStage 2: Cleaning build...\033[0m"
 
                output = sh (
-                       script: 'date',
+                       script: 'ls -l',
                        returnStdout: true
                ).trim()
 
                echo "Date: ${output}"
 
-               echo "ls -l"
+               sh "ls -l"
+
+               echo "${output}"
 
                sh "date"
 
