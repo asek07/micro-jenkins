@@ -32,6 +32,8 @@ node {
 
                echo "Date: ${output}"
 
+               sh "date"
+
                sh "mvn clean"
                echo "\033[1;32mClean complete.\033[0m"
                echo "\033[1;34mStage 2.1: Running tests.\033[0m"
